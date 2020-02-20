@@ -18,12 +18,12 @@ public class TennisGame2 implements TennisGame
         String score = "";
         score = tie(score);
         score = deuce(score);
-        
-        score = love_for_player2(score);
-        score = love_for_player1(score);
-        
-        score = normal1(score);
-        score = normal2(score);
+        if(isNormal())
+        {
+        	P1res = getLiteral(P1point);
+            P2res = getLiteral(P2point);
+            score = P1res + "-" + P2res;
+        }
         
         score = advantage(score);
         
@@ -51,44 +51,8 @@ public class TennisGame2 implements TennisGame
 		return score;
 	}
 
-	private String normal2(String score) {
-		if (P2point>P1point && P2point < 4)
-        {
-			P1res = getLiteral(P1point);
-            P2res = getLiteral(P2point);
-            score = P1res + "-" + P2res;
-        }
-		return score;
-	}
-
-	private String normal1(String score) {
-		if (P1point>P2point && P1point < 4)
-        {
-			P1res = getLiteral(P1point);
-            P2res = getLiteral(P2point);
-            score = P1res + "-" + P2res;
-        }
-		return score;
-	}
-
-	private String love_for_player1(String score) {
-		if (P2point > 0 && P1point==0)
-        {
-			P1res = getLiteral(P1point);
-            P2res = getLiteral(P2point);
-            score = P1res + "-" + P2res;
-        }
-		return score;
-	}
-
-	private String love_for_player2(String score) {
-		if (P1point > 0 && P2point==0)
-        {
-            P1res = getLiteral(P1point);
-            P2res = getLiteral(P2point);
-            score = P1res + "-" + P2res;
-        }
-		return score;
+	private boolean isNormal() {
+		return P2point != P1point;
 	}
 
 	private String deuce(String score) {
